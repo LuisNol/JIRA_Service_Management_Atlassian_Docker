@@ -51,7 +51,7 @@ services:
       - ATLASSIAN_DB_NAME=jiradb
       - VIRTUAL_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
       - LETSENCRYPT_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
-      - LETSENCRYPT_EMAIL=nolberto.sumaran@gmail.com # Cambia esto por tu email
+      - LETSENCRYPT_EMAIL=nolberto.sumaran@gmail.com  # Tu correo electrónico
     networks:
       - internal_network
     volumes:
