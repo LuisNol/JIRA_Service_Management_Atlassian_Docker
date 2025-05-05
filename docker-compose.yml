@@ -10,6 +10,7 @@ services:
       - NGINX_PROXY_READ_TIMEOUT=600
       - NGINX_PROXY_CONNECT_TIMEOUT=600
       - NGINX_PROXY_SEND_TIMEOUT=600
+      - TRUST_DOWNSTREAM_PROXY=false  # Si no tienes un proxy confiable adelante
     ports:
       - "80:80"
       - "443:443"
