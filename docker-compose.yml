@@ -1,6 +1,33 @@
 version: '3'
 
 services:
+  # Contenedor de Nginx Proxy (para redirigir tráfico HTTP y HTTPS)
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    environment:
+      - DEFAULT_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - internal_network
+    restart: always
+
+  # Contenedor de Let's Encrypt para manejar certificados SSL
+  letsencrypt-nginx-proxy-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt-nginx-proxy-companion
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - internal_network
+    restart: always
+
   # Servicio de Jira
   jira:
     build:
@@ -15,8 +42,9 @@ services:
       - ATLASSIAN_DB_USER=jirauser
       - ATLASSIAN_DB_PASSWORD=jiradatabasepassword
       - ATLASSIAN_DB_NAME=jiradb
-    ports:
-      - "8080:8080"  # Exponer Jira al exterior en el puerto 8080
+      - VIRTUAL_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
+      - LETSENCRYPT_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
+      - LETSENCRYPT_EMAIL=nolberto.sumaran@gmail.com  # Cambia esto por tu email
     networks:
       - internal_network
     volumes:
@@ -46,7 +74,7 @@ services:
       - PMA_HOST=mysql
       - PMA_PORT=3306
     ports:
-      - "8081:80"  # Exponer PHPMyAdmin al exterior en el puerto 8081
+      - "8081:80"  # Exponer PHPMyAdmin en el puerto 8081
     networks:
       - internal_network
     restart: always
