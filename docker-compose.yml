@@ -17,7 +17,6 @@ services:
     networks:
       - internal_network
     restart: always
-    # Aquí agregamos la configuración de tiempo de espera
     environment:
       - NGINX_PROXY_READ_TIMEOUT=600
       - NGINX_PROXY_CONNECT_TIMEOUT=600
