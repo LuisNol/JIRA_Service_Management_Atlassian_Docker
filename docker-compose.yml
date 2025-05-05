@@ -10,7 +10,6 @@ services:
       - NGINX_PROXY_READ_TIMEOUT=600
       - NGINX_PROXY_CONNECT_TIMEOUT=600
       - NGINX_PROXY_SEND_TIMEOUT=600
-      - TRUST_DOWNSTREAM_PROXY=false  # Si no tienes un proxy confiable adelante
     ports:
       - "80:80"
       - "443:443"
@@ -74,7 +73,7 @@ services:
       - ./mysql-data:/var/lib/mysql
     restart: always
 
-  # Servicio de PHPMyAdmin
+  # Servicio de PHPMyAdmin (solo accesible de forma local)
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin
@@ -82,7 +81,7 @@ services:
       - PMA_HOST=mysql
       - PMA_PORT=3306
     ports:
-      - "8081:80"  # Exponer PHPMyAdmin en el puerto 8081
+      - "8081:80"  # Exponer PHPMyAdmin en el puerto 8081 para acceso local
     networks:
       - internal_network
     restart: always
