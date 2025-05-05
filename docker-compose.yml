@@ -7,6 +7,9 @@ services:
     container_name: nginx-proxy
     environment:
       - DEFAULT_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
+      - NGINX_PROXY_READ_TIMEOUT=600
+      - NGINX_PROXY_CONNECT_TIMEOUT=600
+      - NGINX_PROXY_SEND_TIMEOUT=600
     ports:
       - "80:80"
       - "443:443"
@@ -17,10 +20,6 @@ services:
     networks:
       - internal_network
     restart: always
-    environment:
-      - NGINX_PROXY_READ_TIMEOUT=600
-      - NGINX_PROXY_CONNECT_TIMEOUT=600
-      - NGINX_PROXY_SEND_TIMEOUT=600
 
   # Contenedor de Let's Encrypt para manejar certificados SSL
   letsencrypt-nginx-proxy-companion:
