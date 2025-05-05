@@ -12,6 +12,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /usr/share/nginx/html:/usr/share/nginx/html  # Agregar esta línea
       - nginx_certs:/etc/nginx/certs  # Volumen persistente para certificados
     networks:
       - internal_network
@@ -25,6 +26,7 @@ services:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /usr/share/nginx/html:/usr/share/nginx/html  # Agregar esta línea
       - nginx_certs:/etc/nginx/certs  # Volumen persistente para certificados
     networks:
       - internal_network
