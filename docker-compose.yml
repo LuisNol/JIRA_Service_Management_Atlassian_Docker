@@ -12,6 +12,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx_certs:/etc/nginx/certs  # Volumen persistente para certificados
     networks:
       - internal_network
     restart: always
@@ -24,6 +25,7 @@ services:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx_certs:/etc/nginx/certs  # Volumen persistente para certificados
     networks:
       - internal_network
     restart: always
@@ -44,7 +46,7 @@ services:
       - ATLASSIAN_DB_NAME=jiradb
       - VIRTUAL_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
       - LETSENCRYPT_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
-      - LETSENCRYPT_EMAIL=nolberto.sumaran@gmail.com  # Cambia esto por tu email
+      - LETSENCRYPT_EMAIL=nolberto.sumaran@gmail.com # Cambia esto por tu email
     networks:
       - internal_network
     volumes:
@@ -84,6 +86,8 @@ networks:
     driver: bridge
 
 volumes:
+  nginx_certs:
+    driver: local
   jira-data:
     driver: local
   mysql-data:
