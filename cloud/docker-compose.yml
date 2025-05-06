@@ -6,7 +6,7 @@ services:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     environment:
-      - DEFAULT_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
+      - DEFAULT_HOST=   # Tu dominio
       - NGINX_PROXY_READ_TIMEOUT=600
       - NGINX_PROXY_CONNECT_TIMEOUT=600
       - NGINX_PROXY_SEND_TIMEOUT=600
@@ -49,9 +49,9 @@ services:
       - ATLASSIAN_DB_USER=jirauser
       - ATLASSIAN_DB_PASSWORD=jiradatabasepassword
       - ATLASSIAN_DB_NAME=jiradb
-      - VIRTUAL_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
-      - LETSENCRYPT_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
-      - LETSENCRYPT_EMAIL=nolberto.sumaran@gmail.com  # Tu correo electrónico
+      - VIRTUAL_HOST=  # Tu dominio
+      - LETSENCRYPT_HOST=  # Tu dominio
+      - LETSENCRYPT_EMAIL= # Tu correo electrónico
     networks:
       - internal_network
     volumes:
@@ -63,10 +63,10 @@ services:
     image: mysql:8.0
     container_name: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=jiradb
-      - MYSQL_USER=jirauser
-      - MYSQL_PASSWORD=jiradatabasepassword
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=
+      - MYSQL_USER=
+      - MYSQL_PASSWORD=
     networks:
       - internal_network
     volumes:
