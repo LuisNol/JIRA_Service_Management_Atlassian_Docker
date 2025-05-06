@@ -43,12 +43,12 @@ services:
     environment:
       - ATLASSIAN_JIRA_LICENSE=SEN-74290435
       - ATLASSIAN_JIRA_HOME=/var/atlassian/application-data/jira
-      - ATLASSIAN_DB_TYPE=mysql
-      - ATLASSIAN_DB_HOST=mysql
-      - ATLASSIAN_DB_PORT=3306
-      - ATLASSIAN_DB_USER=jirauser
-      - ATLASSIAN_DB_PASSWORD=jiradatabasepassword
-      - ATLASSIAN_DB_NAME=jiradb
+      - ATLASSIAN_DB_TYPE=
+      - ATLASSIAN_DB_HOST=
+      - ATLASSIAN_DB_PORT=
+      - ATLASSIAN_DB_USER=
+      - ATLASSIAN_DB_PASSWORD=
+      - ATLASSIAN_DB_NAME=
       - VIRTUAL_HOST=  # Tu dominio
       - LETSENCRYPT_HOST=  # Tu dominio
       - LETSENCRYPT_EMAIL= # Tu correo electrónico
