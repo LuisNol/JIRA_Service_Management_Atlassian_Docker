@@ -15,8 +15,9 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /usr/share/nginx/html:/usr/share/nginx/html  # Agregar esta línea
-      - nginx_certs:/etc/nginx/certs  # Volumen persistente para certificados
+      - /usr/share/nginx/html:/usr/share/nginx/html
+      - /etc/nginx/vhost.d  # ← necesario para HTTPS con Let's Encrypt
+      - nginx_certs:/etc/nginx/certs
     networks:
       - internal_network
     restart: always
@@ -29,8 +30,9 @@ services:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /usr/share/nginx/html:/usr/share/nginx/html  # Agregar esta línea
-      - nginx_certs:/etc/nginx/certs  # Volumen persistente para certificados
+      - /usr/share/nginx/html:/usr/share/nginx/html
+      - /etc/nginx/vhost.d  # ← necesario para HTTPS con Let's Encrypt
+      - nginx_certs:/etc/nginx/certs
     networks:
       - internal_network
     restart: always
@@ -49,9 +51,9 @@ services:
       - ATLASSIAN_DB_USER=jirauser
       - ATLASSIAN_DB_PASSWORD=jiradatabasepassword
       - ATLASSIAN_DB_NAME=jiradb
-      - VIRTUAL_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
-      - LETSENCRYPT_HOST=www.atlassian.jira.avisonline.store  # Tu dominio
-      - LETSENCRYPT_EMAIL=nolberto.sumaran@gmail.com  # Tu correo electrónico
+      - VIRTUAL_HOST=www.atlassian.jira.avisonline.store
+      - LETSENCRYPT_HOST=www.atlassian.jira.avisonline.store
+      - LETSENCRYPT_EMAIL=nolberto.sumaran@gmail.com
     networks:
       - internal_network
     volumes:
@@ -81,7 +83,7 @@ services:
       - PMA_HOST=mysql
       - PMA_PORT=3306
     ports:
-      - "8081:80"  # Exponer PHPMyAdmin en el puerto 8081 para acceso local
+      - "8081:80"
     networks:
       - internal_network
     restart: always
@@ -97,3 +99,4 @@ volumes:
     driver: local
   mysql-data:
     driver: local
+
